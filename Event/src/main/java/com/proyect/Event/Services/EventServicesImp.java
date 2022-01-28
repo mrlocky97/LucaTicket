@@ -45,5 +45,14 @@ public class EventServicesImp implements EventServices{
 		
 		return er.findByGenre(genre);
 	}
+
+
+	@Override
+	public List<Event> findByName(String name) {
+		
+		return er.findByName(name);
+	}
+	
+	
 	
 }
