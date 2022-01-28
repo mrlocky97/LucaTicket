@@ -3,7 +3,7 @@ package com.proyect.Event.controller.exceptions;
 
 public class EventNotFound extends RuntimeException{
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 5L;
 
 	public EventNotFound () {
 		super("FAILED OPERATION: Item DOES NOT exist");

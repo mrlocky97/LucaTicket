@@ -5,9 +5,9 @@ public class EventAlreadyExists extends RuntimeException{
 	private static final long serialVersionUID = 1L;
 
 	public EventAlreadyExists() {
-		super("FAILED OPERATION: Item already exists");
+		super("FAILED OPERATION: ITEM EXISTS");
 	}
 	public EventAlreadyExists (String name) {
-		super("FAILED OPERATION: Item already exists --name: "+ name);
+		super("FAILED OPERATION: ITEM EXISTS "+ name);
 	}
 }

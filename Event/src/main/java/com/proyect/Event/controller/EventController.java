@@ -3,7 +3,7 @@ package com.proyect.Event.controller;
 import java.net.URI;
 import java.util.List;
 
-import org.apache.http.HttpStatus;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,10 +59,14 @@ public class EventController {
 	@PostMapping("/add")
 	public ResponseEntity<?> addEvent(@RequestBody Event event) {
 		log.info("------ addSEvent (POST) ");
-		//String check = findByName(event.getName()).toString();
-		//if(check != null) {
+		
+		//SE ESTA METIENDO AL METODO FINDBYNAME Y AHI ES DONDE LANZAMOS LA EXCEPCION DE NOTFOUND POR ESO APARECE, HAY QUE MEJORAR COMO
+		//ENCONTRAMOS EL FIND EVENT
+		//List<EventResponse> check= findByName(event.getName());
+		//if(!check.isEmpty()) {
+		//	log.info("asdvsdvdfb");
 		//	throw new EventAlreadyExists();
-		//}		
+		//}	
 		Event result = this.save(event);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{code}").buildAndExpand(result.getCode())
 				.toUri();
