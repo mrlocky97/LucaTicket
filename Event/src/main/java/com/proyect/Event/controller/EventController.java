@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+
 import com.proyect.Event.Services.EventServices;
 import com.proyect.Event.model.Event;
 import com.proyect.Event.response.EventResponse;
@@ -78,10 +79,17 @@ public class EventController {
 	}
 
 	// Actualizar juego
-	@Operation(summary = "Update event", description = "Update an event by its code", tags = { "Event" })
+	@Operation(summary = "List events by genre", description = "Update an event by its code", tags = { "Event" })
 	@PutMapping("/{code}")
 	public void updateGame(@RequestBody Event event, @PathVariable String code) {
 		eventServices.deleteEvent(code);
 		eventServices.save(event);
 	}
+	
+	//Listar eventos por género
+	@Operation(summary = "Update event", description = "returns a json with all events by genre in the database", tags = { "Event" })
+	@GetMapping("/events/genre/{genre}")
+	public List<Event> findByGenre(@PathVariable String genre) {
+		return eventServices.findByGenre(genre);
+	};
 }
