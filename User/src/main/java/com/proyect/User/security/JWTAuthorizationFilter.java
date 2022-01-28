@@ -28,7 +28,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
 	private final String HEADER = "Authorization";
 	private final String PREFIX = "Bearer";
-	private final String SECRET = "MySecretkey";
+	private final String SECRET = "mySecretkey";
 	
 	/*
 	 * JWTAuthorizationFilter es el responsable de autorizar al usuario
@@ -38,6 +38,12 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		logger.info("-----------------------------------  	doFilterInternal	  -----------------------------------");
+		logger.info("REQUEST: " + request.getHeader(HEADER));
+		logger.info("REQUEST: " + request.getHeader(PREFIX));
+		logger.info("REQUEST: " + request.getHeader(SECRET));
+		logger.info("RESPONSE: " + response.getContentType());
+		logger.info("CHAIN: " + chain);
 		try {
 			if (checkJWTToken(request, response)) {
 				Claims claims = validateToken(request);
@@ -79,7 +85,9 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 	}
 
 	private boolean checkJWTToken(HttpServletRequest request, HttpServletResponse res) {
+		logger.info("-----------------------------   checkJWTToken   -----------------------------");
 		String authenticationHeader = request.getHeader(HEADER);
+		logger.info("authenticationHeader: " + authenticationHeader);
 		if (authenticationHeader == null || !authenticationHeader.startsWith(PREFIX))
 			return false;
 		return true;

@@ -29,9 +29,9 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@OneToMany
+	/*@OneToMany
 	private Shopping shopping;
-	
+	*/
 	private String name;
 	
 	

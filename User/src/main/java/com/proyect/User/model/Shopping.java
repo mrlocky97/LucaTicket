@@ -1,5 +1,5 @@
 package com.proyect.User.model;
-
+/*
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -34,7 +34,7 @@ public class Shopping {
 	@OneToMany(mappedBy = "shopping")
     private ShoppingEvent event;
 	 */
-	
+/*
 	private String code;
     private String price;
     private String name;
@@ -49,3 +49,4 @@ public class Shopping {
 	
 	
 }
+*/
