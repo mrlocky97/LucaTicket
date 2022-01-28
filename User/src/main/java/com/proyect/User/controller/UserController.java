@@ -88,7 +88,7 @@ public class UserController {
 		// TODO Auto-generated method stub
 		String secretKey = "MySecretkey";
 		String controlWord = "Bearer";
-		
+		log.info("------ getJWTT METHOD ------");
 		List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
 		/*
 		 * JWT forma autocontenida para trasmitir informacion como JSON
