@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.proyect.User.model.Shopping;
 import com.proyect.User.model.User;
 import com.proyect.User.model.UserLogin;
 import com.proyect.User.service.UserService;
@@ -48,6 +49,12 @@ public class UserController {
 	public User save(User user) {
 		return us.newUser(user);
 	}
+	
+	@PutMapping
+	public Shopping save(Shopping shopping) {
+		return us.newShopping(shopping);
+	}
+
 	
 	@Operation(summary = "Add a new user", description = "returns a json with ResponseEntity created", tags = {
 	"User" })
@@ -99,6 +106,15 @@ public class UserController {
 						.signWith(SignatureAlgorithm.HS384, secretKey.getBytes()).compact();
 							
 		return controlWord + " " + token;
+	}
+	
+	@PostMapping("/{id}/buy")
+	public ResponseEntity<?> buyEvent(@RequestBody Shopping shopping) {
+		log.info("------ adding event bought (POST) ");
+		Shopping s = this.save(shopping);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idshopping}").buildAndExpand(s.getIdshopping()).toUri();
+		log.info("------ new event bought ADDED) ");
+		return ResponseEntity.created(location).build();
 	}
 	
 }
