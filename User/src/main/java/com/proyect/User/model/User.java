@@ -36,6 +36,6 @@ public class User {
 
 	private String date;
 
-	private String token;
+	//private String token;
 
 }

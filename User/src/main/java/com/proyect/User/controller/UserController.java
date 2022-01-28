@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.proyect.User.model.User;
+import com.proyect.User.model.UserLogin;
 import com.proyect.User.service.UserService;
 
 import io.jsonwebtoken.Jwts;
@@ -62,15 +63,15 @@ public class UserController {
 	@Operation(summary = "Loggin", description = "log in a user", tags = {
 	"User" })
 	@PostMapping("/login")
-	public User login(@RequestParam("userName") String userName,@RequestParam("password") String password) {
+	public UserLogin login(@RequestParam("userName") String userName,@RequestParam("password") String password) {
 		String token = getJWTT(userName);
 		// creamos un usuario solo para hacer el login
-		User user  = new User();
-		user.setName(userName);
-		user.setPassword(password);
-		user.setToken(token);
-		log.info("------ USUARIO PARA LOGIN: " + user.getName() + " PASSWORD: " + user.getPassword());
-		return user;
+		UserLogin userl  = new UserLogin();
+		userl.setName(userName);
+		userl.setPassword(password);
+		userl.setToken(token);
+		log.info("------ USUARIO PARA LOGIN: " + userl.getName() + " PASSWORD: " + userl.getPassword());
+		return userl;
 	}
 	
 	/*
