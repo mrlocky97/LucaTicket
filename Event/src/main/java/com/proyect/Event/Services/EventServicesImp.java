@@ -31,12 +31,7 @@ public class EventServicesImp implements EventServices{
 		return eventAdapter.of(all);
 	}
 
-	@Override
-	public EventAdapter inserts(EventAdapter eventAdapter) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 
 	@Override
 	public void deleteEvent(String code) {
@@ -44,4 +39,20 @@ public class EventServicesImp implements EventServices{
 		er.deleteEventByCode(code);
 	}
 
+
+	@Override
+	public List<Event> findByGenre(String genre) {
+		
+		return er.findByGenre(genre);
+	}
+
+
+	@Override
+	public List<Event> findByName(String name) {
+		
+		return er.findByName(name);
+	}
+	
+	
+	
 }

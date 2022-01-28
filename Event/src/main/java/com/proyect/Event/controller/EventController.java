@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+
 import com.proyect.Event.Services.EventServices;
 import com.proyect.Event.controller.exceptions.EventNotFound;
 import com.proyect.Event.model.Event;
@@ -82,10 +83,24 @@ public class EventController {
 	}
 
 	// Actualizar juego
-	@Operation(summary = "Update event", description = "Update an event by its code", tags = { "Event" })
+	@Operation(summary = "Update Event", description = "Update an event by its code", tags = { "Event" })
 	@PutMapping("/{code}")
 	public void updateGame(@RequestBody Event event, @PathVariable String code) {
 		eventServices.deleteEvent(code);
 		eventServices.save(event);
+	}
+	
+	//Listar eventos por género
+	@Operation(summary = "List events by genre", description = "returns a json with all events by genre in the database", tags = { "Event" })
+	@GetMapping("/events/genre/{genre}")
+	public List<Event> findByGenre(@PathVariable String genre) {
+		return eventServices.findByGenre(genre);
+	}
+	
+	//Listar eventos por nombre
+	@Operation(summary = "List events by name", description = "returns a json with all events by name in the database", tags = { "Event" })
+	@GetMapping("/events/name/{name}")
+	public List<Event> findByName(@PathVariable String name){
+		return eventServices.findByName(name);
 	}
 }

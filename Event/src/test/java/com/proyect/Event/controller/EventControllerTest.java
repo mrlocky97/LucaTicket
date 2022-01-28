@@ -107,5 +107,51 @@ class EventControllerTest {
 				.log().all();
 
 	}
+	
+	@Test
+	void shouldReturn200WhenWeCallTheRouteFindByGenreRight() {
+		RestAssured.baseURI = "http://localhost:8080";
+
+		RestAssured.given()
+		.accept(ContentType.JSON)
+		.pathParam("genre", "pop")
+		.get("/event/events/genre/{genre}")
+		.then().statusCode(200);
+
+	}
+
+	@Test
+	void shouldReturn404WhenPutARouteFindByGenreWrong() {
+		RestAssured.baseURI = "http://localhost:8080";
+
+		RestAssured.given()
+		.accept(ContentType.JSON)
+		.pathParam("genre", "pop")
+		.get("/event/event/genre/{genre}")
+		.then().statusCode(404);
+
+	}
+	
+	@Test
+	void shouldReturn200WhenWeCallTheRouteFindByNameRight() {
+		RestAssured.baseURI = "http://localhost:8080";
+		
+		RestAssured.given()
+		.accept(ContentType.JSON)
+		.pathParam("name", "Titeres")
+		.get("/event/events/name/{name}")
+		.then().statusCode(200);
+	}
+	
+	@Test
+	void shouldReturn404WhenPutARouteFindByNameWrong() {
+		RestAssured.baseURI ="http://localhost:8080";
+		
+		RestAssured.given()
+		.accept(ContentType.JSON)
+		.pathParam("name", "Titeres")
+		.get("/event/event/name/{name}")
+		.then().statusCode(404);
+	}
 
 }
