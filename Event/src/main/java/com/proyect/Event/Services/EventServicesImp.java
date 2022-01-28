@@ -41,7 +41,7 @@ public class EventServicesImp implements EventServices{
 	@Override
 	public void deleteEvent(String code) {
 		// TODO Auto-generated method stub
-		er.deleteEventByCode(code);;
+		er.deleteEventByCode(code);
 	}
 
 }
