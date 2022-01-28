@@ -1,8 +1,11 @@
 package com.proyect.Event.repository;
 
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
+
 
 import com.proyect.Event.model.Event;
 
@@ -10,4 +13,6 @@ import com.proyect.Event.model.Event;
 public interface EventRepository extends MongoRepository<Event, String>{
 
 	Long deleteEventByCode(String code);
+	
+	List<Event> findByGenre(String genre);
 }

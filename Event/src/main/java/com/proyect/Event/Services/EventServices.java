@@ -8,9 +8,11 @@ import com.proyect.Event.response.EventResponse;
 
 public interface EventServices {
 
-  public Event save(Event event);
-	public EventAdapter inserts(EventAdapter eventAdapter);
+	public Event save(Event event);
+
 	public List<EventResponse> findAll();
+
 	public void deleteEvent(String code);
-  
+
+	public List<Event> findByGenre(String genre);
 }
