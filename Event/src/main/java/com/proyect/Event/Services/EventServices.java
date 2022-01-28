@@ -14,7 +14,7 @@ public interface EventServices {
 
 	public void deleteEvent(String code);
 
-	public List<Event> findByGenre(String genre);
+	public List<EventResponse> findByGenre(String genre);
 	
-	public List<Event> findByName(String name);
+	public List<EventResponse> findByName(String name);
 }

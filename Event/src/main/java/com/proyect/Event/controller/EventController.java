@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.proyect.Event.Services.EventServices;
+import com.proyect.Event.controller.exceptions.EventAlreadyExists;
 import com.proyect.Event.controller.exceptions.EventNotFound;
 import com.proyect.Event.model.Event;
 import com.proyect.Event.response.EventResponse;
@@ -58,9 +59,14 @@ public class EventController {
 	@PostMapping("/add")
 	public ResponseEntity<?> addEvent(@RequestBody Event event) {
 		log.info("------ addSEvent (POST) ");
+		//String check = findByName(event.getName()).toString();
+		//if(check != null) {
+		//	throw new EventAlreadyExists();
+		//}		
 		Event result = this.save(event);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{code}").buildAndExpand(result.getCode())
 				.toUri();
+		
 		log.info("------ new event has been ADDED ");
 		return ResponseEntity.ok("EVENT HAS BEEN CREATED \n" + event);
 	}
@@ -87,7 +93,13 @@ public class EventController {
 	@Operation(summary = "List events by genre", description = "returns a json with all events by genre in the database", tags = {
 			"Event" })
 	@GetMapping("/events/genre/{genre}")
-	public List<Event> findByGenre(@PathVariable String genre) {
+	public List<EventResponse> findByGenre(@PathVariable String genre) {
+		log.info("---------GetEventByGenre");
+		List<EventResponse> e = eventServices.findByGenre(genre);
+		
+		if(e.isEmpty()) {
+			throw new EventNotFound(genre);
+		}
 		return eventServices.findByGenre(genre);
 	}
 
@@ -95,7 +107,15 @@ public class EventController {
 	@Operation(summary = "List events by name", description = "returns a json with all events by name in the database", tags = {
 			"Event" })
 	@GetMapping("/events/name/{name}")
-	public List<Event> findByName(@PathVariable String name) {
+
+	public List<EventResponse> findByName(@PathVariable String name){
+		
+		log.info("---------GetEventByName");
+		List<EventResponse> e = eventServices.findByName(name);
+		
+		if(e.isEmpty()) {
+			throw new EventNotFound(name);
+		}
 		return eventServices.findByName(name);
 	}
 }
