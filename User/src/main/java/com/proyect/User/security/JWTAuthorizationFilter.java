@@ -29,7 +29,11 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 	private final String HEADER = "Authorization";
 	private final String PREFIX = "Bearer";
 	private final String SECRET = "MySecretkey";
-
+	
+	/*
+	 * JWTAuthorizationFilter es el responsable de autorizar al usuario
+	 * 
+	 */ 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {
@@ -43,6 +47,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 					SecurityContextHolder.clearContext();
 				}
 			}
+			// doFilter permite que la peticion continue
 			chain.doFilter(request, response);
 		} catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException e) {
 			// TODO: handle exception
@@ -58,8 +63,8 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 	}
 
 	/**
-	 * Authentication method in Spring flow
-	 * 
+	 * UsernamePasswordAuthenticationToken autoriza el nombre y la contraseña del token
+	 * seteamos el usuario en SecurityContextHolder
 	 * @param claims
 	 */
 
