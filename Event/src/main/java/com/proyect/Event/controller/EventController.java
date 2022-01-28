@@ -3,6 +3,7 @@ package com.proyect.Event.controller;
 import java.net.URI;
 import java.util.List;
 
+import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 import com.proyect.Event.Services.EventServices;
+import com.proyect.Event.controller.exceptions.EventNotFound;
 import com.proyect.Event.model.Event;
 import com.proyect.Event.response.EventResponse;
 
@@ -65,17 +67,22 @@ public class EventController {
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{code}").buildAndExpand(result.getCode())
 				.toUri();
 		log.info("------ new event has been ADDED ");
-		return ResponseEntity.created(location).build();
+		return ResponseEntity.ok("EVENT HAS BEEN CREATED \n" + event);
 	}
 
 	
 	
 	@Operation(summary = "Delete a event", description = "Deletes an event by its code", tags = { "Event" })
 	@DeleteMapping("/deleteEvent/{code}")
-	public void deleteUser(@PathVariable("code") String code) {
+	public ResponseEntity<?> deleteUser(@PathVariable("code") String code) {
 		log.info("------ deleting event) " + code);
-		eventServices.deleteEvent(code);
-		log.info("------ DELETED ");
+		
+			eventServices.deleteEvent(code);
+			log.info("------ DELETED ");
+			return ResponseEntity.ok("DELETED");
+
+		
+		
 	}
 
 	// Actualizar juego
