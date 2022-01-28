@@ -93,14 +93,14 @@ public class EventController {
 	//Listar eventos por género
 	@Operation(summary = "List events by genre", description = "returns a json with all events by genre in the database", tags = { "Event" })
 	@GetMapping("/events/genre/{genre}")
-	public List<Event> findByGenre(@PathVariable String genre) {
+	public List<EventResponse> findByGenre(@PathVariable String genre) {
 		return eventServices.findByGenre(genre);
 	}
 	
 	//Listar eventos por nombre
 	@Operation(summary = "List events by name", description = "returns a json with all events by name in the database", tags = { "Event" })
 	@GetMapping("/events/name/{name}")
-	public List<Event> findByName(@PathVariable String name){
+	public List<EventResponse> findByName(@PathVariable String name){
 		return eventServices.findByName(name);
 	}
 }
