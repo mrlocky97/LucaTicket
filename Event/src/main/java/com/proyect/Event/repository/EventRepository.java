@@ -15,4 +15,6 @@ public interface EventRepository extends MongoRepository<Event, String>{
 	Long deleteEventByCode(String code);
 	
 	List<Event> findByGenre(String genre);
+
+	List<Event> findByName(String name);
 }
