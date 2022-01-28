@@ -61,7 +61,7 @@ public class UserController {
 	
 	@Operation(summary = "Loggin", description = "log in a user", tags = {
 	"User" })
-	@PostMapping("user")
+	@PostMapping("/login")
 	public User login(@RequestParam("userName") String userName,@RequestParam("password") String password) {
 		String token = getJWTT(userName);
 		// creamos un usuario solo para hacer el login
@@ -69,6 +69,7 @@ public class UserController {
 		user.setName(userName);
 		user.setPassword(password);
 		user.setToken(token);
+		log.info("------ USUARIO PARA LOGIN: " + user.getName() + " PASSWORD: " + user.getPassword());
 		return user;
 	}
 	
