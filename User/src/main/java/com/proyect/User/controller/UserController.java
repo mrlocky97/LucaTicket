@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.proyect.User.model.Shopping;
+//import com.proyect.User.model.Shopping;
 import com.proyect.User.model.User;
 import com.proyect.User.model.UserLogin;
 import com.proyect.User.service.UserService;
@@ -49,12 +49,12 @@ public class UserController {
 	public User save(User user) {
 		return us.newUser(user);
 	}
-	
+	/*
 	@PutMapping
 	public Shopping save(Shopping shopping) {
 		return us.newShopping(shopping);
 	}
-
+	*/
 	
 	@Operation(summary = "Add a new user", description = "returns a json with ResponseEntity created", tags = {
 	"User" })
@@ -70,7 +70,8 @@ public class UserController {
 	@Operation(summary = "Loggin", description = "log in a user", tags = {
 	"User" })
 	@PostMapping("/login")
-	public UserLogin login(@RequestParam("userName") String userName,@RequestParam("password") String password) {
+	public UserLogin login(@RequestParam("user") String userName,@RequestParam("password") String password) {
+		log.info("----------------------------- 	LOGIN 	 ----------------------------- ");
 		String token = getJWTT(userName);
 		// creamos un usuario solo para hacer el login
 		UserLogin userl  = new UserLogin();
@@ -86,9 +87,9 @@ public class UserController {
 	 */
 	private String getJWTT(String userName) {
 		// TODO Auto-generated method stub
-		String secretKey = "MySecretkey";
+		String secretKey = "mySecretkey";
 		String controlWord = "Bearer";
-		log.info("------ getJWTT METHOD ------");
+		log.info("------------------- 	getJWTT METHOD 	-------------------");
 		List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
 		/*
 		 * JWT forma autocontenida para trasmitir informacion como JSON
@@ -107,7 +108,7 @@ public class UserController {
 							
 		return controlWord + " " + token;
 	}
-	
+	/*
 	@PostMapping("/{id}/buy")
 	public ResponseEntity<?> buyEvent(@RequestBody Shopping shopping) {
 		log.info("------ adding event bought (POST) ");
@@ -116,5 +117,5 @@ public class UserController {
 		log.info("------ new event bought ADDED) ");
 		return ResponseEntity.created(location).build();
 	}
-	
+	*/
 }
