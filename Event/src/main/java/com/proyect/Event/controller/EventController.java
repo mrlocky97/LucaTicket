@@ -71,17 +71,14 @@ public class EventController {
 	}
 
 	
-	
-	@Operation(summary = "Delete a event", description = "Deletes an event by its code", tags = { "Event" })
-	@DeleteMapping("/deleteEvent/{code}")
-	public ResponseEntity<?> deleteUser(@PathVariable("code") String code) {
-		log.info("------ deleting event) " + code);
-		
-			eventServices.deleteEvent(code);
-			log.info("------ DELETED ");
-			return ResponseEntity.ok("DELETED");
-
-		
+			@Operation(summary = "Delete a event", description = "Deletes an event by its code", tags = { "Event" })
+			@DeleteMapping("/deleteEvent/{code}")
+			public ResponseEntity<?> deleteUser(@PathVariable("code") String code) {
+				log.info("------ deleting event) " + code);		
+					eventServices.deleteEvent(code);
+					log.info("------ DELETED ");
+					return ResponseEntity.ok("DELETED");
+			
 		
 	}
 
