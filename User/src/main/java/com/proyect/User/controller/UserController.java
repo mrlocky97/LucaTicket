@@ -50,12 +50,7 @@ public class UserController {
 		return us.newUser(user);
 	}
 	
-	@PutMapping
-	public Shopping save(Shopping shopping) {
-		return us.newShopping(shopping);
-	}
 
-	
 	@Operation(summary = "Add a new user", description = "returns a json with ResponseEntity created", tags = {
 	"User" })
 	@PostMapping("/add")
@@ -108,13 +103,5 @@ public class UserController {
 		return controlWord + " " + token;
 	}
 	
-	@PostMapping("/{id}/buy")
-	public ResponseEntity<?> buyEvent(@RequestBody Shopping shopping) {
-		log.info("------ adding event bought (POST) ");
-		Shopping s = this.save(shopping);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{idshopping}").buildAndExpand(s.getIdshopping()).toUri();
-		log.info("------ new event bought ADDED) ");
-		return ResponseEntity.created(location).build();
-	}
 	
 }

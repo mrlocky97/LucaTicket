@@ -23,8 +23,6 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private ShoppingRepository sr;
 	
-	//@Autowired 
-	//private ShoppingEventRepository shoppingEventRepository;
 	
 	@Autowired
 	private UserRepository ury;
