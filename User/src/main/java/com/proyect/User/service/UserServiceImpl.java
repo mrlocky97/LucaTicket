@@ -7,22 +7,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
-import com.proyect.User.model.Shopping;
+//import com.proyect.User.model.Shopping;
 import com.proyect.User.model.User;
 //import com.proyect.User.repository.ShoppingEventRepository;
-import com.proyect.User.repository.ShoppingRepository;
+//import com.proyect.User.repository.ShoppingRepository;
 import com.proyect.User.repository.UserRepository;
 //import com.proyect.User.response.UserResponse;
 
 @Transactional
 @Service
 public class UserServiceImpl implements UserService {
-	
+	/*
 	//@Autowired
 	//private UserResponse ur;
 	@Autowired
 	private ShoppingRepository sr;
-	
+
 	
 	@Autowired
 	private UserRepository ury;
@@ -33,13 +33,13 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return ury.save(user);
 	}
-
+/*
 	public Shopping newShopping(Shopping shopping) {
 		
 		return sr.save(shopping);
 
 	}
-	
+*/
 	
 
 }
