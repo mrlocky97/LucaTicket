@@ -27,7 +27,7 @@ public class CustomErrorAtributes extends DefaultErrorAttributes {
 		if (timestamp == null) {
 			errorAttributes.put("timestamp", DateFormat.getTimeInstance() + "NO SUCCESS ----->NULL");
 		} else {
-			errorAttributes.put("timestamp", timestamp + "NO SUCCESS ----->ERROR" );
+			errorAttributes.put("timestamp", timestamp + "  NO SUCCESS ----->ERROR" );
 		}
 		  // Eliminamos la traza para simplificar la salida
 			errorAttributes.remove("trace");
