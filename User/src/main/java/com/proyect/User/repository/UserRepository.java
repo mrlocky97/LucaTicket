@@ -10,10 +10,6 @@ import com.proyect.User.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 	User findByName(String name);
 	User findByPassword(String password);
-	
+	User findOneByMail(String mail);
 	User findByNameAndPassword(String name, String password);
-	/*
-	@Query("select name, password from usuarios  where name =?1 and password=?2 ")
-	User findByNamePassword(String name, String password);
-	*/
 }
