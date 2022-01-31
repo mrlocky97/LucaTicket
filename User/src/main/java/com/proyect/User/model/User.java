@@ -1,6 +1,9 @@
 package com.proyect.User.model;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -45,9 +49,13 @@ public class User {
 	@NotEmpty(message = "Password cannot be empty")
 	private String password;
 	
-
+	@Setter(AccessLevel.NONE)
 	private String date;
 	
-	
+	private void setDate() {
+		
+		String dateString = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+		dateString = date;
+	}
 }
 
