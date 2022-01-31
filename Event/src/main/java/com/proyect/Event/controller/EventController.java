@@ -3,18 +3,22 @@ package com.proyect.Event.controller;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,8 +35,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-
 @RequestMapping("/event")
+@Validated
 @Tag(name = "Event", description = "The event API")
 public class EventController {
 
@@ -57,22 +61,22 @@ public class EventController {
 
 	@Operation(summary = "Add a new eventt", description = "Add a new eventt", tags = { "Event" })
 	@PostMapping("/add")
-	public ResponseEntity<?> addEvent(@RequestBody Event event) {
+	public ResponseEntity<?> addEvent(@Valid @RequestBody Event event) {
 		log.info("------ addSEvent (POST) ");
 		
-		//SE ESTA METIENDO AL METODO FINDBYNAME Y AHI ES DONDE LANZAMOS LA EXCEPCION DE NOTFOUND POR ESO APARECE, HAY QUE MEJORAR COMO
-		//ENCONTRAMOS EL FIND EVENT
-		//List<EventResponse> check= findByName(event.getName());
-		//if(!check.isEmpty()) {
-		//	log.info("asdvsdvdfb");
-		//	throw new EventAlreadyExists();
-		//}	
-		Event result = this.save(event);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{code}").buildAndExpand(result.getCode())
-				.toUri();
+			Event check= eventServices.findOnebyName(event);
+			if(check!=null) {
+				log.info("-----EVENT HAS BEEN FOUND AND IT ALREADY EXISTS");
+				throw new EventAlreadyExists();
+			}	
+			
+			Event result = this.save(event);
+			URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{code}").buildAndExpand(result.getCode())
+					.toUri();
 		
-		log.info("------ new event has been ADDED ");
-		return ResponseEntity.ok("EVENT HAS BEEN CREATED \n" + event);
+			log.info("------ new event has been ADDED ");
+			return ResponseEntity.ok("EVENT HAS BEEN CREATED \n" + event);
+
 	}
 
 	@Operation(summary = "Delete a event", description = "Deletes an event by its code", tags = { "Event" })

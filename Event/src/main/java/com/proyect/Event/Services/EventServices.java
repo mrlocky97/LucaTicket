@@ -17,4 +17,7 @@ public interface EventServices {
 	public List<EventResponse> findByGenre(String genre);
 	
 	public List<EventResponse> findByName(String name);
+	
+	public Event findOnebyName (Event name);
+
 }

@@ -3,14 +3,15 @@ package com.proyect.Event.model;
 
 
 
-import org.springframework.data.annotation.Id;
+
+import javax.validation.constraints.NotEmpty;
+
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @Document(collection = "events")
 @Data
@@ -20,10 +21,13 @@ public class Event {
 	
 	
     private String code;
+    @NotEmpty(message = "Name cannot be empty")
 	private String name;
+    @NotEmpty(message = "Price cannot be empty")
 	private String price;
 	private String short_description;
 	private String long_description;
+	@NotEmpty(message = "Date cannot be empty")
 	private String date;
 	private String time;
 	private String genre;

@@ -49,8 +49,15 @@ public class EventServicesImp implements EventServices{
 
 	@Override
 	public List<EventResponse> findByName(String name) {
-		final List<Event> all = er.findByGenre(name);
+		final List<Event> all = er.findByName(name);
 		return eventAdapter.of(all);
+	}
+
+
+	@Override
+	public Event findOnebyName(Event name) {
+		// TODO Auto-generated method stub
+		return er.findOneByName(name.getName());
 	}
 	
 	
