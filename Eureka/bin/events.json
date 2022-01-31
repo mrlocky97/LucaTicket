@@ -1,0 +1,116 @@
+{
+	"info": {
+		"_postman_id": "71688131-006f-4043-adf3-e0fa7426aab7",
+		"name": "Microservicios. Ej18",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "(7777). Obtener Productos (GET)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7777/product/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7777",
+					"path": [
+						"product",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(8888). Obtener Carritos (GET)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/cart/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"cart",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(8888). Añadir Producto 2 a usuario 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8888/cart/1/add?idProduct=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"cart",
+						"1",
+						"add"
+					],
+					"query": [
+						{
+							"key": "idProduct",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(2222) Servidor Config (Default)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:2222/catalog/default",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2222",
+					"path": [
+						"catalog",
+						"default"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "(2222) Servidor Config (Production)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:2222/catalog/production",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "2222",
+					"path": [
+						"catalog",
+						"production"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
