@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.proyect.User.model.Shopping;
 import com.proyect.User.model.User;
 import com.proyect.User.repository.ShoppingRepository;
-
+import com.proyect.User.repository.UserRepository;
 import com.proyect.User.model.Shopping;
 import com.proyect.User.model.User;
 
@@ -22,21 +22,16 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository ury;
-	
+
 	@Override
 	public User newUser(User user) {
 		// TODO Auto-generated method stub
 		return ury.save(user);
 	}
-	
-	public Shopping newShopping(Shopping shopping) {
-		return sry.save(shopping);
-  }
 
 	@Override
 	public Shopping newShopping(Shopping shopping) {
-		// TODO Auto-generated method stub
-		return sr.save(shopping);
+		return sry.save(shopping);
 	}
 
 	@Override
@@ -62,5 +57,5 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return ury.findByNameAndPassword(name, password);
 	}
-	
+
 }
