@@ -9,7 +9,7 @@ import com.proyect.User.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 	User findByName(String name);
-	User findByPassword(String password);
 	User findOneByMail(String mail);
+	String findOneByMailString(String mail);
 	User findByNameAndPassword(String name, String password);
 }
