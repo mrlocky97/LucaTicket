@@ -13,9 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import org.springframework.context.annotation.Primary;
-
 import com.proyect.User.model.User;
 
 import lombok.Data;
@@ -41,9 +39,5 @@ public class Shopping {
 		return "Shopping [idshopping=" + idshopping + ", code=" + code
 				+ ", price=" + price + ", name=" + name + "]";
 	}
-
-    
-    
-	
-	
+  
 }

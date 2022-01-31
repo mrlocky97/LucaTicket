@@ -4,6 +4,9 @@ import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+import javax.validation.Valid;
+
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -15,6 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.parameters.P;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +28,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+
+import com.proyect.User.controller.exceptions.UserAlreadyExists;
+import com.proyect.User.controller.exceptions.UserNotFound;
 //import com.proyect.User.model.Shopping;
 import com.proyect.User.model.User;
 import com.proyect.User.model.UserLogin;
@@ -35,12 +43,12 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 
 @RestController
+@Validated
 @Tag(name = "User", description = "The user API")
 @RequestMapping("/user")
 public class UserController {
 	
 	private static final Logger log = LoggerFactory.getLogger(UserController.class);
-
 
 	@Autowired
 	private UserService us;
@@ -53,24 +61,45 @@ public class UserController {
 	@Operation(summary = "Add a new user", description = "returns a json with ResponseEntity created", tags = {
 	"User" })
 	@PostMapping("/add")
-	public ResponseEntity<?> newUser(@RequestBody User user) {
+	public ResponseEntity<?> newUser(@Valid @RequestBody User user) {
+		
+		User check= us.findOneByMail(user);
+		if(check!=null) {
+			log.info("-----USER HAS BEEN FOUND AND IT ALREADY EXISTS");
+			throw new UserAlreadyExists();
+		}	
 		log.info("------ adding new User (POST) ");
 		User u = this.save(user);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(u.getId()).toUri();
 		log.info("------ new user ADDED) ");
-		return ResponseEntity.created(location).build();
+		return  ResponseEntity.ok("USER HAS BEEN CREATED \n" + user);
+	}
+	
+	@GetMapping
+	private User existUser(String name, String password) {
+		return us.existUser(name, password);
 	}
 	
 	@Operation(summary = "Loggin", description = "log in a user", tags = {
 	"User" })
 	@PostMapping("/login")
 	public UserLogin login(@RequestParam("user") String userName,@RequestParam("password") String password) {
+		User nameCheck= us.findByName(userName);
+		User passwordCheck= us.findByPassword(password);
+		
+		if(nameCheck==null  || passwordCheck==null) {
+			log.info("---------------USER OR PASSWORD INCORRECT-------- ");
+			throw new UserNotFound(userName);
+		}
+		
 		log.info("----------------------------- 	LOGIN 	 ----------------------------- ");
 		String token = getJWTT(userName);
-		// creamos un usuario solo para hacer el login
+		//comprobar si los datos existen en la db.
+		User u = this.existUser(userName, password);
+		log.info("*****************   "+u.toString());
 		UserLogin userl  = new UserLogin();
-		userl.setName(userName);
-		userl.setPassword(password);
+		userl.setName(u.getName());
+		userl.setPassword(u.getPassword());
 		userl.setToken(token);
 		log.info("------ USUARIO PARA LOGIN: " + userl.getName() + " PASSWORD: " + userl.getPassword());
 		return userl;
