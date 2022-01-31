@@ -1,16 +1,19 @@
 package com.proyect.User.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.proyect.User.adapter.ShoppingAdapter;
 import com.proyect.User.model.Shopping;
 import com.proyect.User.model.User;
 import com.proyect.User.repository.ShoppingRepository;
 import com.proyect.User.repository.UserRepository;
 import com.proyect.User.model.Shopping;
 import com.proyect.User.model.User;
-
+import com.proyect.User.response.ShoppingResponse;
 import com.proyect.User.response.UserResponse;
 
 @Transactional
@@ -60,6 +63,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public String findOneByMailString(String mail) {
 		return ury.findOneByMailString(mail);
+	}
+	
+	@Override
+	public List<ShoppingResponse> findAllShoppings() {
+		final List<Shopping> all = sry.findAll();
+		return ShoppingAdapter.of(all);
 	}
 
 }
