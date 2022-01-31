@@ -13,5 +13,4 @@ public interface UserService {
 	public String findOneByMailString(String mail);
 
 	public String checkPassword(String password);
-
 }
