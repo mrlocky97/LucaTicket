@@ -13,5 +13,4 @@ public interface UserService {
 	public User findByPassword(String password);
 
 	public User existUser(String name, String password);
-
 }
