@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return ury.findOneByMail(mail.getMail());
 	}
-
+/*
 	@Override
 	public User findByName(String name) {
 		// TODO Auto-generated method stub
@@ -51,11 +51,18 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return ury.findByName(password);
 	}
-
+*/
+	@Override
+	public User existUser(String mail) {
+		// TODO Auto-generated method stub
+		return ury.findOneByMail(mail);
+	}
+/*
 	@Override
 	public User existUser(String name, String password) {
 		// TODO Auto-generated method stub
 		return ury.findByNameAndPassword(name, password);
 	}
-
+	
+	*/
 }
