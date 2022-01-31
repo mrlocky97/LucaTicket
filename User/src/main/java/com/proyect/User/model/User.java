@@ -1,11 +1,16 @@
 package com.proyect.User.model;
 
 
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -29,21 +34,17 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	/*@OneToMany
-	private Shopping shopping;
-	*/
+	@OneToMany( targetEntity=Shopping.class )
+	private List<Shopping> shop;
+	
 	private String name;
-	
-	
+		
 	private String lastname;
 	
-
 	private String mail;
 	
-
 	private String password;
 	
-
 	private String date;
 	
 	

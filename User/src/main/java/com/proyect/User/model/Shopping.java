@@ -1,18 +1,21 @@
 package com.proyect.User.model;
-/*
+
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-//import com.proyect.User.model.ShoppingEvent;
+import org.springframework.context.annotation.Primary;
+
 import com.proyect.User.model.User;
 
 import lombok.Data;
@@ -26,27 +29,21 @@ public class Shopping {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idshopping;
 	
-	@OneToMany
-    @JoinColumn(name = "iduser")
-    private User user;
-	
-	/*
-	@OneToMany(mappedBy = "shopping")
-    private ShoppingEvent event;
-	 */
-/*
+	@OneToMany( targetEntity=User.class )
+    private List<User> user;
+
 	private String code;
     private String price;
     private String name;
 
 	@Override
 	public String toString() {
-		return "Shopping [idshopping=" + idshopping + ", user=" + user + ", code=" + code
+		return "Shopping [idshopping=" + idshopping + ", code=" + code
 				+ ", price=" + price + ", name=" + name + "]";
 	}
+
     
     
 	
 	
 }
-*/
