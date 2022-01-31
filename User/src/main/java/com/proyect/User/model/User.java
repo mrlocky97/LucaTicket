@@ -30,7 +30,7 @@ import lombok.Setter;
 @Getter
 @Setter
 
-@Table(name="user")
+@Table(name = "user")
 public class User {
 
 	@Id
@@ -42,22 +42,22 @@ public class User {
   
 	@NotEmpty(message = "Name cannot be empty")
 	private String name;
-	
-  @NotEmpty(message = "Last Name cannot be empty")
+
+	@NotEmpty(message = "Last Name cannot be empty")
 	private String lastname;
-	
-  @NotEmpty(message = "EMail cannot be empty")
+
+	@NotEmpty(message = "EMail cannot be empty")
 	private String mail;
-	
-  @NotEmpty(message = "Password cannot be empty")
+
+	@NotEmpty(message = "Password cannot be empty")
 	private String password;
-  
-  @Setter(AccessLevel.NONE)
+
+	@Setter(AccessLevel.NONE)
 	private String date;
-	
+
 	private void setDate() {
 		String dateString = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
 		dateString = date;
 	}
-  
+
 }

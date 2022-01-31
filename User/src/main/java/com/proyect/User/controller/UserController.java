@@ -86,7 +86,7 @@ public class UserController {
 		// comprobar si los datos existen en la db.
 		User u = this.existUser(mail);
 		if (u != null && u.getPassword().equals(password)) {
-			log.info("***************** " + u.toString());
+			log.info("*****************    " + u.toString());
 			UserLogin userl = new UserLogin();
 			userl.setMail(u.getMail());
 			userl.setPassword(u.getPassword());
@@ -102,7 +102,7 @@ public class UserController {
 	 * construye el token con informacion, expiracion y GrantedAuthority que sirve
 	 * para autorizar peticiones http
 	 */
-	private String getJWTT(String userName) {
+	private String getJWTT(String mail) {
 		// TODO Auto-generated method stub
 		String secretKey = "mySecretkey";
 		String controlWord = "Bearer";
