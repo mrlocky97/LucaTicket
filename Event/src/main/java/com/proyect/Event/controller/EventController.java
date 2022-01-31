@@ -64,7 +64,7 @@ public class EventController {
 		log.info("------ addSEvent (POST) ");
 		
 			List<EventResponse> check= eventServices.findByName(event.getName());
-			if(check!=null) {
+			if(!check.isEmpty()) {
 				log.info("-----EVENT HAS BEEN FOUND AND IT ALREADY EXISTS");
 				throw new EventAlreadyExists();
 			}	
