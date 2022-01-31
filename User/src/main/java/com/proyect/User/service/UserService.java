@@ -1,7 +1,10 @@
 package com.proyect.User.service;
 
+import java.util.List;
+
 import com.proyect.User.model.Shopping;
 import com.proyect.User.model.User;
+import com.proyect.User.response.ShoppingResponse;
 import com.proyect.User.model.Shopping;
 
 public interface UserService {
@@ -13,4 +16,5 @@ public interface UserService {
 	public String findOneByMailString(String mail);
 
 	public String checkPassword(String password);
+	public List<ShoppingResponse> findAllShoppings();
 }
