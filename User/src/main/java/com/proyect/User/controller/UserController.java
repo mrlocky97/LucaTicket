@@ -113,7 +113,7 @@ public class UserController {
 		 * valores aleatorios y sirve como identificador CLAIM proporciona informacion
 		 * del cuerpo del token
 		 */
-		String token = Jwts.builder().setId(UUID.randomUUID().toString().replace("-", "")).setSubject(userName)
+		String token = Jwts.builder().setId(UUID.randomUUID().toString().replace("-", "")).setSubject(mail)
 				.claim("authorities",
 						grantedAuthorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
 				// seteamos la fecha de creacion y la de expiracion
