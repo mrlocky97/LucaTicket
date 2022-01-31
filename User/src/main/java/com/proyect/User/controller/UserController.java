@@ -80,8 +80,8 @@ public class UserController {
 
 	@Operation(summary = "Loggin", description = "log in a user", tags = { "User" })
 	@PostMapping("/login")
-	public UserLogin login(@RequestParam("user") String mail, @RequestParam("password") String password) {
-		log.info("----------------------------- 	LOGIN 	 ----------------------------- ");
+	public UserLogin login(@RequestParam("mail") String mail, @RequestParam("password") String password) {
+		log.info("----------------------------- LOGIN ----------------------------- ");
 		String token = getJWTT(mail);
 		// comprobar si los datos existen en la db.
 		User u = this.existUser(mail);
@@ -113,7 +113,7 @@ public class UserController {
 		 * valores aleatorios y sirve como identificador CLAIM proporciona informacion
 		 * del cuerpo del token
 		 */
-		String token = Jwts.builder().setId(UUID.randomUUID().toString().replace("-", "")).setSubject(mail)
+		String token = Jwts.builder().setId(UUID.randomUUID().toString().replace("-", "")).setSubject(userName)
 				.claim("authorities",
 						grantedAuthorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
 				// seteamos la fecha de creacion y la de expiracion

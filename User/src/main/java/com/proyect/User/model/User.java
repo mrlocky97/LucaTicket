@@ -36,10 +36,10 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-
-	//@OneToMany(targetEntity = Shopping.class)
+	
+	//@OneToMany( targetEntity=Shopping.class )
 	//private List<Shopping> shop;
-
+  
 	@NotEmpty(message = "Name cannot be empty")
 	private String name;
 
