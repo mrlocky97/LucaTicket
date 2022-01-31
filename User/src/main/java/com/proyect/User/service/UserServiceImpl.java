@@ -66,7 +66,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public String findOneByMailString(String mail) {
-		return ury.findOneByMailString(mail);
+		User u= ury.findOneByMail(mail);
+		String mail1 = u.getMail();
+		return mail1;
 	}
 	
 }
