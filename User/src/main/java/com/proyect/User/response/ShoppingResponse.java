@@ -2,6 +2,8 @@ package com.proyect.User.response;
 
 import java.io.Serializable;
 
+import com.proyect.User.model.User;
+
 import lombok.Data;
 
 @Data

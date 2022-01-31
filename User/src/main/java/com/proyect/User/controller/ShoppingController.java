@@ -4,21 +4,25 @@ import java.net.URI;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.proyect.User.response.ShoppingResponse;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.proyect.User.model.Shopping;
 import com.proyect.User.service.UserService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
@@ -36,7 +40,16 @@ public class ShoppingController {
 		return us.newShopping(shopping);
 	}
 	
-	@PostMapping("/{id}/buy")
+	@Operation(summary = "List of all available shoppings", description = "returns a json with all shoppings in the database", tags = {
+	"Shopping" })
+	@GetMapping("/shoppings")
+	public List<ShoppingResponse> findAllShoppings() {
+		log.info("------ read Shopping (GET) ");
+		return us.findAllShoppings();
+	}
+	
+	@PostMapping("/buy")
+	//En testing
 	public ResponseEntity<?> buyEvent(@RequestBody Shopping shopping) {
 		log.info("------ adding event bought (POST) ");
 		Shopping s = this.save(shopping);
