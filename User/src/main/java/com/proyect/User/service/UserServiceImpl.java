@@ -42,6 +42,27 @@ public class UserServiceImpl implements UserService {
 	}
 
 
+	@Override
+	public User findOneByMail(User mail) {
+		// TODO Auto-generated method stub
+		return ury.findOneByMail(mail.getMail());
+	}
+
+
+	@Override
+	public User findByName(String name) {
+		// TODO Auto-generated method stub
+		return ury.findByName(name);
+	}
+
+
+	@Override
+	public User findByPassword(String password) {
+		// TODO Auto-generated method stub
+		return ury.findByName(password);
+	}
+
+
 	
 
 }

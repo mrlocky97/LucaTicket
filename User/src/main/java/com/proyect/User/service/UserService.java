@@ -7,4 +7,7 @@ import com.proyect.User.model.User;
 public interface UserService {
 	public User newUser(User user);
 	public Shopping newShopping(Shopping shopping);
+	public User findOneByMail(User mail);
+	public User findByName(String name);
+	public User findByPassword(String password);
 }
