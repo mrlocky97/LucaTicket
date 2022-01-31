@@ -36,6 +36,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/event")
+@Validated
 @Tag(name = "Event", description = "The event API")
 public class EventController {
 
@@ -60,14 +61,15 @@ public class EventController {
 
 	@Operation(summary = "Add a new eventt", description = "Add a new eventt", tags = { "Event" })
 	@PostMapping("/add")
-	public ResponseEntity<?> addEvent(@RequestBody Event event) {
+	public ResponseEntity<?> addEvent(@Valid @RequestBody Event event) {
 		log.info("------ addSEvent (POST) ");
 		
-			List<EventResponse> check= eventServices.findByName(event.getName());
-			if(!check.isEmpty()) {
+			Event check= eventServices.findOnebyName(event);
+			if(check!=null) {
 				log.info("-----EVENT HAS BEEN FOUND AND IT ALREADY EXISTS");
 				throw new EventAlreadyExists();
 			}	
+			
 			Event result = this.save(event);
 			URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{code}").buildAndExpand(result.getCode())
 					.toUri();
