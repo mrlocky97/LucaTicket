@@ -82,6 +82,7 @@ public class UserController {
 	public UserLogin login(@RequestParam("mail") String mail,@RequestParam("password") String password) {
 		String checkMail= us.findOneByMailString(mail);
 		String checkPassword = us.checkPassword(password);
+		log.info("-----------HAY CONFLICTOS----------");
 		
 		if(checkMail==null  || checkPassword != password) {
 			log.info("---------------USER OR PASSWORD INCORRECT-------- ");

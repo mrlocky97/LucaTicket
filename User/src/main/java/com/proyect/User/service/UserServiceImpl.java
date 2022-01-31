@@ -54,9 +54,9 @@ public class UserServiceImpl implements UserService {
 	public String checkPassword(String mail) {
 
 		// TODO Auto-generated method stub
-		User check = ury.findOneByMail(mail);		
-		String password = check.getPassword();
-		return password;
+		User check = ury.findOneByMail(mail);	
+		System.out.println("---------------------CONFLICTO-----------------------" + check.toString());
+		return check.getPassword();
 	}
 
 
