@@ -41,7 +41,6 @@ public class UserServiceImpl implements UserService {
 		return sr.save(shopping);
 	}
 
-
 	@Override
 	public User findOneByMail(User mail) {
 		// TODO Auto-generated method stub
@@ -62,7 +61,10 @@ public class UserServiceImpl implements UserService {
 		return ury.findByName(password);
 	}
 
-
+	@Override
+	public User existUser(String name, String password) {
+		// TODO Auto-generated method stub
+		return ury.findByNameAndPassword(name, password);
+	}
 	
-
 }

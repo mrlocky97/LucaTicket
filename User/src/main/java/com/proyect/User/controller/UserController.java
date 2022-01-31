@@ -19,6 +19,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.parameters.P;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,7 +50,6 @@ public class UserController {
 	
 	private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
-
 	@Autowired
 	private UserService us;
 	
@@ -75,6 +75,11 @@ public class UserController {
 		return  ResponseEntity.ok("USER HAS BEEN CREATED \n" + user);
 	}
 	
+	@GetMapping
+	private User existUser(String name, String password) {
+		return us.existUser(name, password);
+	}
+	
 	@Operation(summary = "Loggin", description = "log in a user", tags = {
 	"User" })
 	@PostMapping("/login")
@@ -89,10 +94,12 @@ public class UserController {
 		
 		log.info("----------------------------- 	LOGIN 	 ----------------------------- ");
 		String token = getJWTT(userName);
-		// creamos un usuario solo para hacer el login
+		//comprobar si los datos existen en la db.
+		User u = this.existUser(userName, password);
+		log.info("*****************   "+u.toString());
 		UserLogin userl  = new UserLogin();
-		userl.setName(userName);
-		userl.setPassword(password);
+		userl.setName(u.getName());
+		userl.setPassword(u.getPassword());
 		userl.setToken(token);
 		log.info("------ USUARIO PARA LOGIN: " + userl.getName() + " PASSWORD: " + userl.getPassword());
 		return userl;
