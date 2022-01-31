@@ -49,10 +49,13 @@ public class User {
 	@NotEmpty(message = "Password cannot be empty")
 	private String password;
 	
-	
+	@Setter(AccessLevel.NONE)
 	private String date;
 	
-
-	
+	private void setDate() {
+		
+		String dateString = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+		dateString = date;
+	}
 }
 
