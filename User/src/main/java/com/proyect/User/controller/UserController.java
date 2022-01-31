@@ -75,33 +75,27 @@ public class UserController {
 		return  ResponseEntity.ok("USER HAS BEEN CREATED \n" + user);
 	}
 	
-	@GetMapping
-	private User existUser(String name, String password) {
-		return us.existUser(name, password);
-	}
 	
 	@Operation(summary = "Loggin", description = "log in a user", tags = {
 	"User" })
 	@PostMapping("/login")
-	public UserLogin login(@RequestParam("user") String userName,@RequestParam("password") String password) {
-		User nameCheck= us.findByName(userName);
-		User passwordCheck= us.findByPassword(password);
+	public UserLogin login(@RequestParam("mail") String mail,@RequestParam("password") String password) {
+		String checkMail= us.findOneByMailString(mail);
+		String checkPassword = us.checkPassword(password);
 		
-		if(nameCheck==null  || passwordCheck==null) {
+		if(checkMail==null  || checkPassword != password) {
 			log.info("---------------USER OR PASSWORD INCORRECT-------- ");
-			throw new UserNotFound(userName);
+			throw new UserNotFound(mail);
 		}
 		
 		log.info("----------------------------- 	LOGIN 	 ----------------------------- ");
-		String token = getJWTT(userName);
-		//comprobar si los datos existen en la db.
-		User u = this.existUser(userName, password);
-		log.info("*****************   "+u.toString());
+		String token = getJWTT(mail);
+		//comprobar si los datos existen en la db.;
 		UserLogin userl  = new UserLogin();
-		userl.setName(u.getName());
-		userl.setPassword(u.getPassword());
+		userl.setMail(mail);
+		userl.setPassword(password);
 		userl.setToken(token);
-		log.info("------ USUARIO PARA LOGIN: " + userl.getName() + " PASSWORD: " + userl.getPassword());
+		log.info("------ USUARIO PARA LOGIN: " + mail + " PASSWORD: " + password);
 		return userl;
 	}
 	

@@ -10,7 +10,7 @@ public interface UserService {
 
 	public User findOneByMail(User mail);
 	public User findByName(String name);
-	public User findByPassword(String password);
+	public String findOneByMailString(String mail);
 
-	public User existUser(String name, String password);
+	public String checkPassword(String password);
 }

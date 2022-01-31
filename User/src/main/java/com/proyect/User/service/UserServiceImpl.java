@@ -46,16 +46,20 @@ public class UserServiceImpl implements UserService {
 		return ury.findByName(name);
 	}
 
-	@Override
-	public User findByPassword(String password) {
+
+	@Override 
+	public String checkPassword(String mail) {
+
 		// TODO Auto-generated method stub
-		return ury.findByName(password);
+		User check = ury.findOneByMail(mail);		
+		String password = check.getPassword();
+		return password;
 	}
 
+
 	@Override
-	public User existUser(String name, String password) {
-		// TODO Auto-generated method stub
-		return ury.findByNameAndPassword(name, password);
+	public String findOneByMailString(String mail) {
+		return ury.findOneByMailString(mail);
 	}
 
 }
