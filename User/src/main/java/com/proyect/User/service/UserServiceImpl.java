@@ -73,4 +73,9 @@ public class UserServiceImpl implements UserService {
 		return ShoppingAdapter.of(all);
 	}
 
+	@Override
+	public User existUser(String mail) {
+	// TODO Auto-generated method stub
+	return ury.findOneByMail(mail);
+	}
 }

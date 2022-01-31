@@ -17,4 +17,5 @@ public interface UserService {
 
 	public String checkPassword(String password);
 	public List<ShoppingResponse> findAllShoppings();
+	public User existUser(String mail);
 }
