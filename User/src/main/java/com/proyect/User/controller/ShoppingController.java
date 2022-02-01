@@ -54,7 +54,7 @@ public class ShoppingController {
 	}*/
 	
 	
-	
+	//lo conseguimos
 	@GetMapping("/name/{name}")
 	public List<ShoppingResponse> findByName(@PathVariable String name) {
 	System.out.println("------------------ controller findbyname");

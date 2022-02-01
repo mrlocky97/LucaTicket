@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return ury.findOneByMail(mail.getMail());
 	}
-	
+	//lo conseguimos
 	@Override
 	public List<ShoppingResponse> findAllShoppings(String name) {
 		

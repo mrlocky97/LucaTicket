@@ -12,6 +12,7 @@ import com.proyect.User.response.ShoppingResponse;
 @FeignClient(name="event", url= "http://localhost:7777")
 public interface UserProxy {
 
+	//lo conseguimos
 	@GetMapping("/event/events/name/{name}")
 	public List<ShoppingResponse> findByName(@PathVariable String name);
 }
