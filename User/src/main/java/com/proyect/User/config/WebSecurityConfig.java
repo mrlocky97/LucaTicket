@@ -20,6 +20,8 @@ public class WebSecurityConfig  extends WebSecurityConfigurerAdapter{
 			.authorizeRequests()
 			// cambiar permisos 
 			.antMatchers(HttpMethod.POST, "/user").anonymous()
+			.antMatchers(HttpMethod.GET, "/shopping").anonymous()
+			.antMatchers(HttpMethod.GET, "/shopping/name").anonymous()
 			.antMatchers(HttpMethod.POST, "/user/add").anonymous()
 			.antMatchers(HttpMethod.POST, "/user/login").permitAll()
 			.anyRequest().authenticated();
