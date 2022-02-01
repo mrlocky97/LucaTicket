@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.proyect.User.adapter.ShoppingAdapter;
 import com.proyect.User.model.Shopping;
 import com.proyect.User.model.User;
+import com.proyect.User.proxy.UserProxy;
 import com.proyect.User.repository.ShoppingRepository;
 import com.proyect.User.repository.UserRepository;
 import com.proyect.User.model.Shopping;
@@ -20,6 +21,9 @@ import com.proyect.User.response.UserResponse;
 @Service
 public class UserServiceImpl implements UserService {
 
+	@Autowired
+	private UserProxy proxy;
+	
 	@Autowired
 	private ShoppingRepository sry;
 
@@ -42,11 +46,13 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return ury.findOneByMail(mail.getMail());
 	}
-	
+	//lo conseguimos
 	@Override
-	public List<ShoppingResponse> findAllShoppings() {
-		final List<Shopping> all = sry.findAll();
-		return ShoppingAdapter.of(all);
+	public List<ShoppingResponse> findAllShoppings(String name) {
+		
+		//final List<Shopping> all = sry.findAll();
+		System.out.println("---------- service findbyname");
+		return proxy.findByName(name);
 	}
 
 	@Override
