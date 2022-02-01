@@ -57,6 +57,7 @@ public class ShoppingController {
 	
 	@GetMapping("/name/{name}")
 	public List<ShoppingResponse> findByName(@PathVariable String name) {
+	System.out.println("------------------ controller findbyname");
 		
 		return us.findAllShoppings(name);
 	}

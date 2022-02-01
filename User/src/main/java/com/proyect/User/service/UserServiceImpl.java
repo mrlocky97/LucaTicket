@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public List<ShoppingResponse> findAllShoppings(String name) {
-		proxy.findByName(name);
+		
 		//final List<Shopping> all = sry.findAll();
 		System.out.println("---------- service findbyname");
 		return proxy.findByName(name);
