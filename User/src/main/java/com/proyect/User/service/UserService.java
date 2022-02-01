@@ -12,6 +12,6 @@ public interface UserService {
 	public Shopping newShopping(Shopping shopping);
 
 	public User findOneByMail(User mail);
-	public List<ShoppingResponse> findAllShoppings();
+	public List<ShoppingResponse> findAllShoppings(String name);
 	public User existUser(String mail);
 }
