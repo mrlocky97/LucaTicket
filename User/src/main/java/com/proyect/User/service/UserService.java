@@ -9,10 +9,11 @@ import com.proyect.User.model.Shopping;
 
 public interface UserService {
 	public User newUser(User user);
-	public Shopping newShopping(Shopping shopping);
+	//public ShoppingResponse newShopping(Shopping shopping);
 
 	public User findOneByMail(User mail);
 	//lo conseguimos
-	public List<ShoppingResponse> findAllShoppings(String name);
+	public ShoppingResponse findShopping(String name);
 	public User existUser(String mail);
+	
 }

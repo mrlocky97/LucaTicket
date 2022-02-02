@@ -14,5 +14,5 @@ public interface UserProxy {
 
 	//lo conseguimos
 	@GetMapping("/event/events/name/{name}")
-	public List<ShoppingResponse> findByName(@PathVariable String name);
+	public ShoppingResponse findByName(@PathVariable String name);
 }
