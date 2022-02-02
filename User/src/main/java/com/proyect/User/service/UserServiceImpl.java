@@ -24,8 +24,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserProxy proxy;
 	
-	@Autowired
-	private ShoppingRepository sry;
+	//@Autowired
+	//private ShoppingRepository sry;
 
 	@Autowired
 	private UserRepository ury;
@@ -36,10 +36,6 @@ public class UserServiceImpl implements UserService {
 		return ury.save(user);
 	}
 
-	@Override
-	public Shopping newShopping(Shopping shopping) {
-		return sry.save(shopping);
-	}
 
 	@Override
 	public User findOneByMail(User mail) {
@@ -48,7 +44,7 @@ public class UserServiceImpl implements UserService {
 	}
 	//lo conseguimos
 	@Override
-	public List<ShoppingResponse> findAllShoppings(String name) {
+	public ShoppingResponse findShopping(String name) {
 		
 		//final List<Shopping> all = sry.findAll();
 		System.out.println("---------- service findbyname");
@@ -60,4 +56,16 @@ public class UserServiceImpl implements UserService {
 	// TODO Auto-generated method stub
 	return ury.findOneByMail(mail);
 	}
+
+
+	//@Override
+	//public ShoppingResponse newShopping(Shopping shopping) {
+	//	// TODO Auto-generated method stu	
+	//	return ShoppingAdapter.of(shopping);
+	//}
+
+
+
+
+	
 }

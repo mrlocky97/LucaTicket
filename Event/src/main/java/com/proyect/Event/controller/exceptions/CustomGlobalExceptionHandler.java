@@ -40,34 +40,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 		response.sendError(HttpStatus.BAD_REQUEST.value(), "ERROR FATAL");
 	}
 	
-	@Override
-	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-			HttpHeaders headers, HttpStatus status, WebRequest request) {
 
-		logger.info("------ handleMethodArgumentNotValid()");
-		
-		CustomErrorJSON customError = new CustomErrorJSON();
-
-		customError.setTimestamp(new Date());
-		customError.setStatus(status.value());
-		customError.setError(status.name());
-		
-		//Aqui INDICAMOS EL CAMPO EN EL QUE FALLA NUESTRO DOC
-		List<String> messages = new ArrayList<String>();
-		for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-			messages.add(error.getField() + ": " + error.getDefaultMessage());
-		}
-		customError.setMessage(messages);
-		
-		//Mostramos datos originales
-		request.getDescription(false);
-		String uri = request.getDescription(false);
-		uri = uri.substring(uri.lastIndexOf("=")+1);
-		customError.setPath(uri);
-
-		return new ResponseEntity<>(customError, headers, status);
-
-	}
 
 }
 
