@@ -131,24 +131,21 @@ public class EventController {
 	}
 	
 	// Listar eventos por venue[1] -> city
-	@Operation(summary = "List events by venue", description = "returns a json with all events by venue", tags = {
-			"Event" })
-	@GetMapping("/events/venue")
-	private List<EventResponse> findByVenue(@PathVariable String[] venue){
+	//@Operation(summary = "List events by venue", description = "returns a json with all events by venue", tags = {
+	//		"Event" })
+	//@GetMapping("/events/venue")
+	public List<EventResponse> findByVenue(@PathVariable String[] venue){
 		
 		log.info("---------GetEventByVenue");
 		List<EventResponse> e = eventServices.findByVenue(venue);
 			
-		if(e.isEmpty()) {
-			//throw new EventNotFound(venue);
-		}
 		return eventServices.findByVenue(venue);
 	}
 		
 	// Listar eventos por venue[1] -> city
 	@Operation(summary = "List events by city", description = "returns a json with all events by city", tags = {
 			"Event" })
-	@GetMapping("/events/city")
+	@GetMapping("/city/{city}")
 
 	public void findByCity(@PathVariable String city){
 			String[] element;
@@ -166,7 +163,7 @@ public class EventController {
 				this.findByVenue(listVenues.get(i));
 			}
 			if(e.isEmpty()) {
-				//throw new EventNotFound(venue);
+				throw new EventNotFound(city);
 			}
 			
 		}	
