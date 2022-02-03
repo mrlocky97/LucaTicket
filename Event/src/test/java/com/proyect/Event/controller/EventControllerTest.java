@@ -17,7 +17,7 @@ class EventControllerTest {
 
 	@Test
 	void shouldReturn200WhenWeCallTheRouteRight() {
-		RestAssured.baseURI = "http://localhost:8080";
+		RestAssured.baseURI = "http://localhost:7777";
 
 		RestAssured.given().get("/event/events").then().statusCode(200);
 
@@ -25,7 +25,7 @@ class EventControllerTest {
 
 	@Test
 	void shouldReturn405WhenPutARouteWrong() {
-		RestAssured.baseURI = "http://localhost:8080";
+		RestAssured.baseURI = "http://localhost:7777";
 
 		RestAssured.given().get("/event/event").then().statusCode(405);
 
@@ -41,7 +41,7 @@ class EventControllerTest {
 
 		System.out.println(request.toJSONString());
 
-		RestAssured.baseURI = "http://localhost:8080";
+		RestAssured.baseURI = "http://localhost:7777";
 
 		RestAssured.given().header("Content-Type", "aplication/json").contentType(ContentType.JSON)
 				.accept(ContentType.JSON).body(request.toJSONString()).when().post("/event/add/").then().statusCode(201)
@@ -66,7 +66,7 @@ class EventControllerTest {
 
 		System.out.println(request1.toJSONString());
 
-		RestAssured.baseURI = "http://localhost:8080";
+		RestAssured.baseURI = "http://localhost:7777";
 
 		RestAssured.given().header("Content-Type", "aplication/json").contentType(ContentType.JSON)
 				.accept(ContentType.JSON).body(request.toJSONString()).when().post("/event/add/").then().statusCode(201)
@@ -79,7 +79,7 @@ class EventControllerTest {
 	
 	@Test
 	void shouldRemoveAnExistingEvent() {
-		RestAssured.baseURI = "http://localhost:8080";
+		RestAssured.baseURI = "http://localhost:7777";
 
 		RestAssured.given().log().all()
 				.accept(ContentType.JSON)
@@ -100,7 +100,7 @@ class EventControllerTest {
 
 		System.out.println(request.toJSONString());
 
-		RestAssured.baseURI = "http://localhost:8080";
+		RestAssured.baseURI = "http://localhost:7777";
 
 		RestAssured.given().header("Content-Type", "aplication/json").contentType(ContentType.JSON)
 				.accept(ContentType.JSON).body(request.toJSONString()).when().post("/event/add/").then().statusCode(201)
@@ -110,7 +110,7 @@ class EventControllerTest {
 	
 	@Test
 	void shouldReturn200WhenWeCallTheRouteFindByGenreRight() {
-		RestAssured.baseURI = "http://localhost:8080";
+		RestAssured.baseURI = "http://localhost:7777";
 
 		RestAssured.given()
 		.accept(ContentType.JSON)
@@ -122,7 +122,7 @@ class EventControllerTest {
 
 	@Test
 	void shouldReturn404WhenPutARouteFindByGenreWrong() {
-		RestAssured.baseURI = "http://localhost:8080";
+		RestAssured.baseURI = "http://localhost:7777";
 
 		RestAssured.given()
 		.accept(ContentType.JSON)
@@ -134,7 +134,7 @@ class EventControllerTest {
 	
 	@Test
 	void shouldReturn200WhenWeCallTheRouteFindByNameRight() {
-		RestAssured.baseURI = "http://localhost:8080";
+		RestAssured.baseURI = "http://localhost:7777";
 		
 		RestAssured.given()
 		.accept(ContentType.JSON)
@@ -145,12 +145,34 @@ class EventControllerTest {
 	
 	@Test
 	void shouldReturn404WhenPutARouteFindByNameWrong() {
-		RestAssured.baseURI ="http://localhost:8080";
+		RestAssured.baseURI ="http://localhost:7777";
 		
 		RestAssured.given()
 		.accept(ContentType.JSON)
 		.pathParam("name", "Titeres")
 		.get("/event/event/name/{name}")
+		.then().statusCode(404);
+	}
+	
+	@Test
+	void shouldReturn200WhenWeCallTheRouteFindByCityRight() {
+		RestAssured.baseURI = "http://localhost:7777";
+		
+		RestAssured.given()
+		.accept(ContentType.JSON)
+		.pathParam("city", "Viena")
+		.get("/event/events/name/{name}")
+		.then().statusCode(200);
+	}
+	
+	@Test
+	void shouldReturn404WhenPutARouteFindByCityWrong() {
+		RestAssured.baseURI ="http://localhost:7777";
+		
+		RestAssured.given()
+		.accept(ContentType.JSON)
+		.pathParam("city", "Viena")
+		.get("/event/event/city/{city}")
 		.then().statusCode(404);
 	}
 
