@@ -30,6 +30,12 @@ public class EventServicesImp implements EventServices{
 		final List<Event> all = er.findAll();
 		return eventAdapter.of(all);
 	}
+	
+	@Override
+	public List<Event> findEveryThing() {
+		final List<Event> all = er.findAll();
+		return all;
+	}
 
 	
 
@@ -62,9 +68,9 @@ public class EventServicesImp implements EventServices{
 
 
 	@Override
-	public List<EventResponse> findByVenue(String[] venue) {
-		final List<Event> all = er.findByVenue(venue);
-		return eventAdapter.of(all);
+	public List<Event> findByVenue(String[] venue) {
+		final List<Event> e = er.findByVenue(venue);
+		return e;
 	}
 	
 	
