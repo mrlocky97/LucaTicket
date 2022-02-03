@@ -102,6 +102,8 @@ public class ShoppingController {
 	
 
 	// lo conseguimos
+	@Operation(summary = "Find Event by name", description = "returns a json with a ShoppingResponse", tags = {
+	"Shopping" })
 	@GetMapping("/{name}")
 	public ShoppingResponse findByName(@PathVariable String name) {
 		System.out.println("------------------ controller findbyname");
