@@ -77,7 +77,7 @@ public class ShoppingController {
 		if(user == null) {
 			throw new UserNotFound();
 		}else {
-			/*
+			
 			Shopping shopping =  new Shopping();
 			shopping.setCode(r.getCode());
 			shopping.setName(r.getName());
@@ -85,7 +85,7 @@ public class ShoppingController {
 			shopping.setIdshopping(r.getId());
 			shopping.setUser(user.getName());
 			ss.newShopping(shopping);
-			*/
+			
 			
 		return "You're being redirected to our payment gateway to pay for ---> Name of event: " + r.getName()
 				+ "  price to pay €" + r.getPrice() + "User: " + user.getName();
