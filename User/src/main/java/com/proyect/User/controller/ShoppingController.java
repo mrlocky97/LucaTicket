@@ -27,6 +27,7 @@ import com.proyect.User.controller.exceptions.UserNotFound;
 import com.proyect.User.model.Shopping;
 import com.proyect.User.model.User;
 import com.proyect.User.proxy.UserProxy;
+import com.proyect.User.service.ShoppingServices;
 import com.proyect.User.service.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -43,6 +44,9 @@ public class ShoppingController {
 	private UserService us;
 	@Autowired
 	private UserProxy proxy;
+	
+	@Autowired
+	private ShoppingServices ss;
 
 	// @PutMapping
 	// public Shopping save(ShoppingResponse shopping) {
@@ -73,7 +77,16 @@ public class ShoppingController {
 		if(user == null) {
 			throw new UserNotFound();
 		}else {
-			r.setUser(user.getName());
+			
+			Shopping shopping =  new Shopping();
+			shopping.setCode(r.getCode());
+			shopping.setName(r.getName());
+			shopping.setPrice(r.getPrice());
+			shopping.setIdshopping(r.getId());
+			shopping.setUser(user.getName());
+			ss.newShopping(shopping);
+			
+			
 		return "You're being redirected to our payment gateway to pay for ---> Name of event: " + r.getName()
 				+ "  price to pay €" + r.getPrice() + "User: " + user.getName();
 		}	
