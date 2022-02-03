@@ -10,4 +10,12 @@ public class UserNotFound extends RuntimeException{
 	public UserNotFound (String name) {
 		super("FAILED OPERATION: User and password incorrect "+ name);
 	}
+	public UserNotFound (int id) {
+		super("FAILED OPERATION: User not found by: "+ id);
+	}
+	
+	public UserNotFound (String message, String name) {
+		super(message + " " + name);
+	}
+	
 }
