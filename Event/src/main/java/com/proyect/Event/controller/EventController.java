@@ -100,7 +100,7 @@ public class EventController {
 
 	// Actualizar juego
 	@Operation(summary = "Update Event", description = "Update an event by its code", tags = { "Event" })
-	@PutMapping("/{code}")
+	@PutMapping("/updateEvent/{code}")
 	public void updateGame(@RequestBody Event event, @PathVariable String code) {
 		eventServices.deleteEvent(code);
 		eventServices.save(event);
@@ -151,7 +151,7 @@ public class EventController {
 	// Listar eventos por venue[1] -> city
 	@Operation(summary = "List events by city", description = "returns a json with all events by city", tags = {
 			"Event" })
-	@GetMapping("/city/{city}")
+	@GetMapping("/events/city/{city}")
 
 	public List<Event> findByCity(@PathVariable String city){
 			String[] element;
