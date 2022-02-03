@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User existUser(String mail) {
-	// TODO Auto-generated method stub
+	
 	return ury.findOneByMail(mail);
 	}
 	

@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -34,8 +35,11 @@ import com.proyect.User.controller.exceptions.UserAlreadyExists;
 import com.proyect.User.controller.exceptions.UserNotFound;
 //import com.proyect.User.model.Shopping;
 import com.proyect.User.model.User;
+import com.proyect.User.model.UserData;
 import com.proyect.User.model.UserLogin;
+import com.proyect.User.response.ShoppingResponse;
 import com.proyect.User.response.UserResponse;
+import com.proyect.User.service.ShoppingServices;
 import com.proyect.User.service.UserService;
 
 import io.jsonwebtoken.Jwts;
@@ -53,6 +57,8 @@ public class UserController {
 
 	@Autowired
 	private UserService us;
+	@Autowired
+	private ShoppingServices ss;
 
 	@PutMapping
 	public User save(User user) {
@@ -76,9 +82,9 @@ public class UserController {
 		return ResponseEntity.ok("USER HAS BEEN CREATED \n" + user);
 	}
 
-	@GetMapping
-	private User existUser(String name) {
-		return us.existUser(name);
+	@GetMapping("/{mail}")
+	private User existUser(String mail) {
+		return us.existUser(mail);
 	}
 
 	@Operation(summary = "Loggin", description = "log in a user", tags = { "User" })
@@ -170,4 +176,17 @@ public class UserController {
 			return us.findAll();
 		}
 
+		//Listar datos del usuario
+		@Operation(summary = "List the data of a user", description = "returns a json with the data of a user", tags = {
+		"User" })
+		@GetMapping("/datauser/{mail}")
+		public UserData dataUser (@PathVariable String mail) {
+			User user = us.existUser(mail);
+			List <ShoppingResponse> all = ss.findByUser(user.getName());
+			UserData ud = new UserData();
+			ud.setUser(user);
+			ud.setAll(all);
+			return ud;
+		}
+		
 }
