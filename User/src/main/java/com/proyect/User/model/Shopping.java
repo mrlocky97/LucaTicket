@@ -27,8 +27,8 @@ public class Shopping {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idshopping;
 	
-	@OneToMany( targetEntity=User.class )
-    private List<User> user;
+	//@OneToMany( targetEntity=User.class )
+    private String user;
 
 	private String code;
     private String price;

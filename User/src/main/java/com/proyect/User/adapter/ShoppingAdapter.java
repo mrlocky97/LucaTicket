@@ -3,6 +3,8 @@ package com.proyect.User.adapter;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.stereotype.Component;
+
 import com.proyect.User.model.Shopping;
 //import com.proyect.User.model.Shopping;
 //import com.proyect.User.model.ShoppingEvent;
@@ -10,12 +12,13 @@ import com.proyect.User.model.Shopping;
 //import com.proyect.User.response.ShoppingResponse;
 import com.proyect.User.response.ShoppingResponse;
 
+@Component
 public class ShoppingAdapter {
 	
 	public static ShoppingResponse of(Shopping shopping) {
 		ShoppingResponse sr = new ShoppingResponse();
 		sr.setId(shopping.getIdshopping());
-		sr.setUser(((Shopping) shopping.getUser()).getName());
+		sr.setUser(shopping.getUser());
 		sr.setCode(shopping.getCode());
 		sr.setName(shopping.getName());
 		sr.setPrice(shopping.getPrice());
