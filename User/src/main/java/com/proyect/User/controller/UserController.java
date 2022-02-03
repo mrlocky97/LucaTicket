@@ -19,7 +19,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.parameters.P;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +35,7 @@ import com.proyect.User.controller.exceptions.UserNotFound;
 //import com.proyect.User.model.Shopping;
 import com.proyect.User.model.User;
 import com.proyect.User.model.UserLogin;
+import com.proyect.User.response.UserResponse;
 import com.proyect.User.service.UserService;
 
 import io.jsonwebtoken.Jwts;
@@ -124,5 +127,47 @@ public class UserController {
 
 		return controlWord + " " + token;
 	}
+	
+	@Operation(summary = "Delete a user", description = "Deletes an user by its code", tags = { "User" })
+	@DeleteMapping("/deleteUser/{id}")
+	public ResponseEntity<?> deleteUser(@PathVariable("id") int id) {
+		log.info("------ deleting user) " + id);
+		us.deleteUserById(id);
+		log.info("------ DELETED ");
+		return ResponseEntity.ok("DELETED");
+
+	}
+
+	// Actualizar User
+	@Operation(summary = "Update User", description = "Update an user by its id", tags = { "User" })
+	@PutMapping("/update/{id}")
+	public void updateUser(@RequestBody User user, @PathVariable int id) {
+		us.deleteUserById(id);
+		this.newUser(user);
+	}
+	
+	// Listar Users por id
+		@Operation(summary = "List users by id", description = "return a json with the user by its id", tags = {
+				"Event" })
+		@GetMapping("/events/user/{id}")
+
+		public List<UserResponse> findById(@PathVariable int id){
+			
+			log.info("---------GetUserById");
+			List<UserResponse> e = us.findById(id);
+			
+			if(e.isEmpty()) {
+				//throw new UserNotFound(id);
+			}
+			return us.findById(id);
+		}
+		
+		@Operation(summary = "List of all available users", description = "returns a json with all users in the database", tags = {
+		"User" })
+		@GetMapping("/users")
+		public List<UserResponse> findAll() {
+			log.info("------ readSEvents (GET) ");
+			return us.findAll();
+		}
 
 }
