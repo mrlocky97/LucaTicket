@@ -28,10 +28,13 @@ public class EventAdapter {
 		
 	}
 	
+	
 	public List<EventResponse> of(List<Event> events) {
         return events
         		.stream()
                 .map(p -> of(p))
                 .collect(Collectors.toList());
     }
+	
+	
 }

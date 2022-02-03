@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +30,7 @@ import com.proyect.Event.Services.EventServices;
 import com.proyect.Event.controller.exceptions.EventAlreadyExists;
 import com.proyect.Event.controller.exceptions.EventNotFound;
 import com.proyect.Event.model.Event;
+import com.proyect.Event.repository.EventRepository;
 import com.proyect.Event.response.EventResponse;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -43,7 +44,7 @@ public class EventController {
 
 	private static final Logger log = LoggerFactory.getLogger(EventController.class);
 	
-	private List<String[]> listVenues = new ArrayList<String[]>();
+	
 	
 	@Autowired
 	private EventServices eventServices;
@@ -54,6 +55,11 @@ public class EventController {
 	public List<EventResponse> findAll() {
 		log.info("------ readSEvents (GET) ");
 		return eventServices.findAll();
+	}
+	
+	public List<Event> findEverything() {
+		log.info("------ readSEvents (GET) ");
+		return eventServices.findEveryThing();
 	}
 
 	@Operation(summary = "Save a event", description = "inserts an event to the database", tags = { "Event" })
@@ -134,12 +140,12 @@ public class EventController {
 	//@Operation(summary = "List events by venue", description = "returns a json with all events by venue", tags = {
 	//		"Event" })
 	//@GetMapping("/events/venue")
-	public List<EventResponse> findByVenue(@PathVariable String[] venue){
+	public List<Event> findByVenue(@PathVariable String[] venue){
 		
 		log.info("---------GetEventByVenue");
-		List<EventResponse> e = eventServices.findByVenue(venue);
+		List<Event> e = eventServices.findByVenue(venue);
 			
-		return eventServices.findByVenue(venue);
+		return e;
 	}
 		
 	// Listar eventos por venue[1] -> city
@@ -147,27 +153,64 @@ public class EventController {
 			"Event" })
 	@GetMapping("/city/{city}")
 
-	public void findByCity(@PathVariable String city){
+	public List<Event> findByCity(@PathVariable String city){
 			String[] element;
+			List<String[]> listVenues = new ArrayList<String[]>();
+			List<List<Event>> ev = new ArrayList<List<Event>>();
+			List<Event> list = new ArrayList<Event>();
 			log.info("---------GetEventByCity");
 			
-			List<EventResponse> e = this.findAll();
-			for (int i = 0; i<e.size(); i++) {
-	            element = ((Event) e).getVenue();
-	            if(element[1].compareToIgnoreCase(city) == 0) {
-	            	listVenues.add(element);
-	            }
-	        }
-			
-			for(int i = 0; i < listVenues.size(); i++) {
-				this.findByVenue(listVenues.get(i));
-			}
+			List<Event> e = this.findEverything();
 			if(e.isEmpty()) {
 				throw new EventNotFound(city);
 			}
 			
+			
+			for (int i = 0; i< e.size(); i++) {
+				
+		             try {           	
+		            	 element = e.get(i).getVenue();
+		            	 if(element.length >= 2) {
+						     if(element[1].compareToIgnoreCase(city) == 0 ) {
+						            listVenues.add(element);
+						     }  
+		            	 }
+		             }catch(NullPointerException ex) {
+		            	 
+		             }
+		     }
+			
+
+			for(int i = 0; i < listVenues.size(); i++) {
+				try {	
+					if(!ev.contains(this.findByVenue(listVenues.get(i))))
+						ev.add( this.findByVenue(listVenues.get(i)));
+				
+				}catch(NullPointerException ex) {
+					
+				}
+			}
+			
+			
+			for(int i = 0; i < ev.size(); i++) {
+					
+				for(int j = 0; j < ev.get(i).size(); j++) {
+					try {
+					list.add(ev.get(i).get(j));
+					
+					}catch(NullPointerException ex)	{
+						
+					}
+				}
+			}
+			
+			
+			
+			if(ev.isEmpty()) {
+				throw new EventNotFound(city);
+			}
+			
+			return list;
 		}	
 		
-		
-	
 }

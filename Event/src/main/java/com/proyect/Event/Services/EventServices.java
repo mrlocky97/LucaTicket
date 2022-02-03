@@ -20,7 +20,9 @@ public interface EventServices {
 	
 	public Event findOnebyName (Event name);
 	
-	public List<EventResponse> findByVenue(String[] venue);
+	public List<Event> findByVenue(String[] venue);
+	
+	public List<Event> findEveryThing();
 
 
 }
