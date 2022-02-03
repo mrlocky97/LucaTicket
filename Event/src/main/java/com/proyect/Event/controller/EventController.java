@@ -181,6 +181,10 @@ public class EventController {
 		     }
 			
 
+			if(listVenues.isEmpty()) {
+				throw new EventNotFound(city);
+			}
+			
 			for(int i = 0; i < listVenues.size(); i++) {
 				try {	
 					if(!ev.contains(this.findByVenue(listVenues.get(i))))
@@ -191,6 +195,9 @@ public class EventController {
 				}
 			}
 			
+			if(ev.isEmpty()) {
+				throw new EventNotFound(city);
+			}
 			
 			for(int i = 0; i < ev.size(); i++) {
 					
@@ -203,12 +210,7 @@ public class EventController {
 					}
 				}
 			}
-			
-			
-			
-			if(ev.isEmpty()) {
-				throw new EventNotFound(city);
-			}
+	
 			
 			return list;
 		}	
