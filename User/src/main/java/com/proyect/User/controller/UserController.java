@@ -160,7 +160,7 @@ public class UserController {
 			List<UserResponse> e = us.findById(id);
 			
 			if(e.isEmpty()) {
-				//throw new UserNotFound(id);
+				throw new UserNotFound(id);
 			}
 			return us.findById(id);
 		}
@@ -178,12 +178,18 @@ public class UserController {
 		"User" })
 		@GetMapping("/datauser/{mail}")
 		public UserData dataUser (@PathVariable String mail) {
+			
 			User user = us.existUser(mail);
-			List <ShoppingResponse> all = ss.findByUser(user.getName());
+			if(user != null) {
+				List <ShoppingResponse> all = ss.findByUser(user.getName());
 			UserData ud = new UserData();
 			ud.setUser(user);
 			ud.setAll(all);
 			return ud;
+			}else {
+				throw new UserNotFound("FAILED OPERATION: User does not exist with the email:", mail);
+			}
+			
 		}
 		
 }
