@@ -23,6 +23,7 @@ import com.proyect.User.response.ShoppingResponse;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.proyect.User.adapter.ShoppingAdapter;
+import com.proyect.User.controller.exceptions.UserNotFound;
 import com.proyect.User.model.Shopping;
 import com.proyect.User.model.User;
 import com.proyect.User.proxy.UserProxy;
@@ -69,9 +70,14 @@ public class ShoppingController {
 	public String buyShopping(@PathVariable String eventName, @PathVariable String userMail) {
 		ShoppingResponse r = proxy.findByName(eventName);
 		User user = us.existUser(userMail);
-		r.setUser(user.getName());
+		if(user == null) {
+			throw new UserNotFound();
+		}else {
+			r.setUser(user.getName());
 		return "You're being redirected to our payment gateway to pay for ---> Name of event: " + r.getName()
 				+ "  price to pay €" + r.getPrice() + "User: " + user.getName();
+		}
+		
 
 	}
 	
