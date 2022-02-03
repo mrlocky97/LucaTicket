@@ -5,13 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.proyect.User.adapter.ShoppingAdapter;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.proyect.User.adapter.ShoppingAdapter;
 import com.proyect.User.model.Shopping;
 import com.proyect.User.repository.ShoppingRepository;
 import com.proyect.User.response.ShoppingResponse;
