@@ -119,12 +119,12 @@ public class EventController {
 			"Event" })
 	@GetMapping("/events/name/{name}")
 
-	public List<EventResponse> findByName(@PathVariable String name){
+	public EventResponse findByName(@PathVariable String name){
 		
 		log.info("---------GetEventByName");
-		List<EventResponse> e = eventServices.findByName(name);
+		EventResponse e = eventServices.findByName(name);
 		
-		if(e.isEmpty()) {
+		if(e==null) {
 			throw new EventNotFound(name);
 		}
 		return eventServices.findByName(name);

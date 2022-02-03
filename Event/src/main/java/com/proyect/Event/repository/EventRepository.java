@@ -16,7 +16,7 @@ public interface EventRepository extends MongoRepository<Event, String>{
 	
 	List<Event> findByGenre(String genre);
 
-	List<Event> findByName(String name);
+	Event findByName(String name);
 	
 	Event findOneByName(String name);
 	
