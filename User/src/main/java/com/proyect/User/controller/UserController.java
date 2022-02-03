@@ -130,7 +130,7 @@ public class UserController {
 
 		return controlWord + " " + token;
 	}
-	
+
 	@Operation(summary = "Delete a user", description = "Deletes an user by its code", tags = { "User" })
 	@DeleteMapping("/deleteUser/{id}")
 	public ResponseEntity<?> deleteUser(@PathVariable("id") int id) {
@@ -148,48 +148,47 @@ public class UserController {
 		us.deleteUserById(id);
 		this.newUser(user);
 	}
-	
+
 	// Listar Users por id
-		@Operation(summary = "List users by id", description = "return a json with the user by its id", tags = {
-				"Event" })
-		@GetMapping("/events/user/{id}")
+	@Operation(summary = "List users by id", description = "return a json with the user by its id", tags = { "Event" })
+	@GetMapping("/events/user/{id}")
 
-		public List<UserResponse> findById(@PathVariable int id){
-			
-			log.info("---------GetUserById");
-			List<UserResponse> e = us.findById(id);
-			
-			if(e.isEmpty()) {
-				throw new UserNotFound(id);
-			}
-			return us.findById(id);
-		}
-		
-		@Operation(summary = "List of all available users", description = "returns a json with all users in the database", tags = {
-		"User" })
-		@GetMapping("/users")
-		public List<UserResponse> findAll() {
-			log.info("------ readSEvents (GET) ");
-			return us.findAll();
-		}
+	public List<UserResponse> findById(@PathVariable int id) {
 
-		//Listar datos del usuario
-		@Operation(summary = "List the data of a user", description = "returns a json with the data of a user", tags = {
-		"User" })
-		@GetMapping("/datauser/{mail}")
-		public UserData dataUser (@PathVariable String mail) {
-			
-			User user = us.existUser(mail);
-			if(user != null) {
-				List <ShoppingResponse> all = ss.findByUser(user.getName());
+		log.info("---------GetUserById");
+		List<UserResponse> e = us.findById(id);
+
+		if (e.isEmpty()) {
+			throw new UserNotFound(id);
+		}
+		return us.findById(id);
+	}
+
+	@Operation(summary = "List of all available users", description = "returns a json with all users in the database", tags = {
+			"User" })
+	@GetMapping("/users")
+	public List<UserResponse> findAll() {
+		log.info("------ readSEvents (GET) ");
+		return us.findAll();
+	}
+
+	// Listar datos del usuario
+	@Operation(summary = "List the data of a user", description = "returns a json with the data of a user", tags = {
+			"User" })
+	@GetMapping("/datauser/{mail}")
+	public UserData dataUser(@PathVariable String mail) {
+
+		User user = us.existUser(mail);
+		if (user != null) {
+			List<ShoppingResponse> all = ss.findByUser(user.getName());
 			UserData ud = new UserData();
 			ud.setUser(user);
 			ud.setAll(all);
 			return ud;
-			}else {
-				throw new UserNotFound("FAILED OPERATION: User does not exist with the email:", mail);
-			}
-			
+		} else {
+			throw new UserNotFound("FAILED OPERATION: User does not exist with the email:", mail);
 		}
-		
+
+	}
+
 }

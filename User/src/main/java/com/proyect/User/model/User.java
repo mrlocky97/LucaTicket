@@ -30,7 +30,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-  
+
 	@NotEmpty(message = "Name cannot be empty")
 	private String name;
 
@@ -51,6 +51,4 @@ public class User {
 		dateString = date;
 	}
 
-	
-	
 }

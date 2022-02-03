@@ -29,11 +29,11 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 	private final String HEADER = "Authorization";
 	private final String PREFIX = "Bearer";
 	private final String SECRET = "mySecretkey";
-	
+
 	/*
 	 * JWTAuthorizationFilter es el responsable de autorizar al usuario
 	 * 
-	 */ 
+	 */
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {
@@ -67,12 +67,6 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 		String jwtToken = request.getHeader(HEADER).replace(PREFIX, "");
 		return Jwts.parser().setSigningKey(SECRET.getBytes()).parseClaimsJws(jwtToken).getBody();
 	}
-
-	/**
-	 * UsernamePasswordAuthenticationToken autoriza el nombre y la contraseña del token
-	 * seteamos el usuario en SecurityContextHolder
-	 * @param claims
-	 */
 
 	private void setUpSpringAuthentication(Claims claims) {
 		@SuppressWarnings("unchecked")

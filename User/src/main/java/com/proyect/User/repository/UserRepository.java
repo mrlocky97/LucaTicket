@@ -11,7 +11,6 @@ import com.proyect.User.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
 	User findByName(String name);
 	User findOneByMail(String mail);
-	//String findOneByMailString(String mail);
 	User findByNameAndPassword(String name, String password);
 	Long deleteUserById(int id);
 	List<User> findById(int id);
