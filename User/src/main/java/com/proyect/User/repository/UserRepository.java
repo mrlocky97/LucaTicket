@@ -1,5 +1,7 @@
 package com.proyect.User.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -12,4 +14,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	User findOneByMail(String mail);
 	//String findOneByMailString(String mail);
 	User findByNameAndPassword(String name, String password);
+	Long deleteUserById(int id);
+	List<User> findById(int id);
 }

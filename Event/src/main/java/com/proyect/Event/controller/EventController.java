@@ -1,6 +1,7 @@
 package com.proyect.Event.controller;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -41,7 +42,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class EventController {
 
 	private static final Logger log = LoggerFactory.getLogger(EventController.class);
-
+	
+	private List<String[]> listVenues = new ArrayList<String[]>();
+	
 	@Autowired
 	private EventServices eventServices;
 
@@ -126,4 +129,48 @@ public class EventController {
 		}
 		return eventServices.findByName(name);
 	}
+	
+	// Listar eventos por venue[1] -> city
+	@Operation(summary = "List events by venue", description = "returns a json with all events by venue", tags = {
+			"Event" })
+	@GetMapping("/events/venue")
+	private List<EventResponse> findByVenue(@PathVariable String[] venue){
+		
+		log.info("---------GetEventByVenue");
+		List<EventResponse> e = eventServices.findByVenue(venue);
+			
+		if(e.isEmpty()) {
+			//throw new EventNotFound(venue);
+		}
+		return eventServices.findByVenue(venue);
+	}
+		
+	// Listar eventos por venue[1] -> city
+	@Operation(summary = "List events by city", description = "returns a json with all events by city", tags = {
+			"Event" })
+	@GetMapping("/events/city")
+
+	public void findByCity(@PathVariable String city){
+			String[] element;
+			log.info("---------GetEventByCity");
+			
+			List<EventResponse> e = this.findAll();
+			for (int i = 0; i<e.size(); i++) {
+	            element = ((Event) e).getVenue();
+	            if(element[1].compareToIgnoreCase(city) == 0) {
+	            	listVenues.add(element);
+	            }
+	        }
+			
+			for(int i = 0; i < listVenues.size(); i++) {
+				this.findByVenue(listVenues.get(i));
+			}
+			if(e.isEmpty()) {
+				//throw new EventNotFound(venue);
+			}
+			
+		}	
+		
+		
+	
 }

@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import com.proyect.User.adapter.ShoppingAdapter;
+import com.proyect.User.adapter.UserAdapter;
 import com.proyect.User.model.Shopping;
 import com.proyect.User.model.User;
 import com.proyect.User.proxy.UserProxy;
@@ -29,6 +31,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository ury;
+	
+	@Autowired
+	private UserAdapter ua;
 
 	@Override
 	public User newUser(User user) {
@@ -56,16 +61,23 @@ public class UserServiceImpl implements UserService {
 	// TODO Auto-generated method stub
 	return ury.findOneByMail(mail);
 	}
-
-
-	//@Override
-	//public ShoppingResponse newShopping(Shopping shopping) {
-	//	// TODO Auto-generated method stu	
-	//	return ShoppingAdapter.of(shopping);
-	//}
-
-
-
-
 	
+	@Override
+	public void deleteUserById(int id) {
+		// TODO Auto-generated method stub
+		ury.deleteUserById(id);
+	}
+
+	@Override
+	public List<UserResponse> findById(int id) {
+		final List<User> all = ury.findById(id);
+		return ua.of(all);
+	}
+	
+	@Override
+	public List<UserResponse> findAll() {
+		final List<User> all = ury.findAll();
+		return ua.of(all);
+	}
+
 }

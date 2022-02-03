@@ -19,5 +19,8 @@ public interface EventServices {
 	public EventResponse findByName(String name);
 	
 	public Event findOnebyName (Event name);
+	
+	public List<EventResponse> findByVenue(String[] venue);
+
 
 }
