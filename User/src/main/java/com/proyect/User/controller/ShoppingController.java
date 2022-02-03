@@ -61,15 +61,22 @@ public class ShoppingController {
 	}
 	*/
 	
+	//Comprar evento por usuario
+	
 	@Operation(summary = "Shopping we are about to buy", description = "returns a json with our shopping", tags = {
 			"Shopping" })
-	@PostMapping("/{name}/buy")
-	public String buyShopping(@PathVariable String name, @RequestBody String mail) {
-		ShoppingResponse r = proxy.findByName(name);
+	@PostMapping("/buyevent/{userMail}/{eventName}")
+	public String buyShopping(@PathVariable String eventName, @PathVariable String userMail) {
+		ShoppingResponse r = proxy.findByName(eventName);
+		User user = us.existUser(userMail);
+		r.setUser(user.getName());
 		return "You're being redirected to our payment gateway to pay for ---> Name of event: " + r.getName()
-				+ "  price to pay €" + r.getPrice();
+				+ "  price to pay €" + r.getPrice() + "User: " + user.getName();
 
 	}
+	
+	
+	
 
 	// lo conseguimos
 	@GetMapping("/{name}")
