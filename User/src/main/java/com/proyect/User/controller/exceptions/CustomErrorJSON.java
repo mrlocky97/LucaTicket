@@ -48,10 +48,10 @@ public class CustomErrorJSON {
 	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
 	}
-	
+
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = this.changeTimeStamp(timestamp);
-	}	
+	}
 
 	public int getStatus() {
 		return status;
@@ -77,7 +77,6 @@ public class CustomErrorJSON {
 		this.trace = trace;
 	}
 
-
 	public List<String> getMessage() {
 		return message;
 	}
@@ -101,8 +100,6 @@ public class CustomErrorJSON {
 	public void setJdk(String jdk) {
 		this.jdk = jdk;
 	}
-	
-	
 
 	@Override
 	public String toString() {
