@@ -1,7 +1,6 @@
 package com.proyect.User.response;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 import lombok.Data;
 
