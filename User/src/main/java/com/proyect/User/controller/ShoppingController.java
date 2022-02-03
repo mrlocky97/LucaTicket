@@ -76,10 +76,10 @@ public class ShoppingController {
 			r.setUser(user.getName());
 		return "You're being redirected to our payment gateway to pay for ---> Name of event: " + r.getName()
 				+ "  price to pay €" + r.getPrice() + "User: " + user.getName();
-		}
-		
+		}	
 
 	}
+	
 	
 	
 	
