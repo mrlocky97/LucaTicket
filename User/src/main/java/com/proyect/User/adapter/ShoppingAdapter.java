@@ -14,22 +14,19 @@ import com.proyect.User.response.ShoppingResponse;
 
 @Component
 public class ShoppingAdapter {
-	
+
 	public static ShoppingResponse of(Shopping shopping) {
 		ShoppingResponse sr = new ShoppingResponse();
-		sr.setId(shopping.getIdshopping());
 		sr.setUser(shopping.getUser());
 		sr.setCode(shopping.getCode());
 		sr.setName(shopping.getName());
 		sr.setPrice(shopping.getPrice());
-		
 
 		return sr;
 	}
 
-	
 	public static List<ShoppingResponse> of(List<Shopping> shoppings) {
-		
+
 		return shoppings.stream().map(p -> of(p)).collect(Collectors.toList());
 	}
 
