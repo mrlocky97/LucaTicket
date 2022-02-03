@@ -1,5 +1,8 @@
 package com.proyect.User.utils;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class ValidationCard {
 	/*
 	4 for Visa cards
@@ -74,5 +77,11 @@ public class ValidationCard {
             return Long.parseLong(num.substring(0, k));
         }
         return number;
+    }
+    
+    public static String fecha() {
+    	 LocalDateTime fecha = LocalDateTime.now();
+         DateTimeFormatter isoFecha = DateTimeFormatter.ISO_LOCAL_DATE;
+         return fecha.format(isoFecha);
     }
 }

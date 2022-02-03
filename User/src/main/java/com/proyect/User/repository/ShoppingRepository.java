@@ -6,5 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.proyect.User.model.Shopping;
 import com.proyect.User.response.ShoppingResponse;
 
+@Repository
 public interface ShoppingRepository extends JpaRepository<Shopping, Integer>{
 }
